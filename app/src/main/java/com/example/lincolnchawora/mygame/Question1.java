@@ -89,7 +89,7 @@ public class Question1 extends AppCompatActivity {
 
 
                 } else if(textBox.getText().toString().toLowerCase().equals(answer)){
-                    conBtn.setBackgroundColor(Color.rgb(115,230,0));
+                    conBtn.setBackgroundColor(Color.rgb(117,230,0));
                     conBtn.setTextColor(Color.WHITE);
 
                     // initilialise layout inflater
