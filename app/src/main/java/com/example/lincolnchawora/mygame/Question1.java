@@ -64,7 +64,7 @@ public class Question1 extends AppCompatActivity {
 
         constraintLayout = (ConstraintLayout) findViewById(R.id.constraint);
 
-        conBtn.setEnabled(false);
+        conBtn.setEnabled(false); // check
 
 
         textBox.setOnKeyListener(new View.OnKeyListener() {
