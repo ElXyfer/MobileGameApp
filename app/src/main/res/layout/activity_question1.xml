@@ -43,34 +43,20 @@
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="126dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonTest" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="339dp" />
 
     <Button
         android:id="@+id/buttonTest"
         android:layout_width="187dp"
         android:layout_height="43dp"
-        android:layout_marginBottom="36dp"
         android:layout_marginLeft="8dp"
         android:text="Continue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteX="83dp"
-        app:layout_constraintHorizontal_bias="0.502" />
-
-    <TextView
-        android:id="@+id/warningTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="71dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.501" />
+        android:layout_marginBottom="46dp" />
 
 </android.support.constraint.ConstraintLayout>
