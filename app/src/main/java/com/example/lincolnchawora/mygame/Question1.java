@@ -6,6 +6,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import java.util.Timer;
 
 public class Question1 extends AppCompatActivity {
 
@@ -31,6 +34,7 @@ public class Question1 extends AppCompatActivity {
     PopupWindow popupWindow;
     LayoutInflater layoutInflater;
     ConstraintLayout constraintLayout;
+    Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,8 @@ public class Question1 extends AppCompatActivity {
         imgView = (ImageView)findViewById(R.id.imageView);
         textBox = (EditText)findViewById(R.id.editText);
 
+
+
         warnTxt = (TextView)findViewById(R.id.warningTxt);
         warnTxt.setTextSize(15);
         warnTxt.setTextColor(Color.RED);
@@ -58,13 +64,29 @@ public class Question1 extends AppCompatActivity {
 
         constraintLayout = (ConstraintLayout) findViewById(R.id.constraint);
 
+        conBtn.setEnabled(false);
+
+
+        textBox.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                String ed_text = textBox.getText().toString().trim();
+                if(ed_text.isEmpty()) {
+                    conBtn.setEnabled(false);
+                } else {
+                    conBtn.setEnabled(true);
+                }
+                return false;
+            }
+        });
+
 
         conBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(textBox.getText().toString().equals("")) {
-                    warnTxt.setText("Please provide an answer.");
+
 
                 } else if(textBox.getText().toString().toLowerCase().equals(answer)){
                     conBtn.setBackgroundColor(Color.rgb(115,230,0));
