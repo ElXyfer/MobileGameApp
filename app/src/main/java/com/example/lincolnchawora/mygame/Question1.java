@@ -99,7 +99,7 @@ public class Question1 extends AppCompatActivity {
                     ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.successpopup, null);
 
                     // create pop up window, pass created layout (with, height)
-                    popupWindow = new PopupWindow(container, 991,200);
+                    popupWindow = new PopupWindow(container, 990,200);
 
                     // show pop up window,
                     popupWindow.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, 50, 1250);
