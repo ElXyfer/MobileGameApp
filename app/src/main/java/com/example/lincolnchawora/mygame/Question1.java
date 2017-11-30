@@ -95,65 +95,18 @@ public class Question1 extends AppCompatActivity {
             }
         });
 
+
         conBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(textBox.getText().toString().toLowerCase().equals(answer)){
-                    conBtn.setBackgroundColor(Color.rgb(115,230,0));
-                    conBtn.setTextColor(Color.WHITE);
 
-                    // initilialise layout inflater
-                    layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-
-                    correctSound.start();
-
-                    // new layout, pass success pop up
-                    ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.successpopup, null);
-
-                    // create pop up window, pass created layout (with, height)
-                    popupWindow = new PopupWindow(container, 991,200);
-
-                    // show pop up window,
-                    popupWindow.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, 50, 1250);
-
-
-
-                    conBtn.setText("Continue");
-
-
-                    conBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent testIntent = new Intent(Question1.this, Question2.class); // change this to next question
-                            startActivity(testIntent);
-                        }
-                    });
+                    CorrectFunction();
 
                 } else if(!textBox.getText().toString().toLowerCase().equals(answer)) {
-                    layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-                    ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.wrongpopup, null);
-                    TextView wrongTxt = container.findViewById(R.id.WrongText);
-                    popupWindow = new PopupWindow(container, 990,200);
-                    popupWindow.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, 50, 1250);
 
-                    wrongTxt.setText("Correct answer: " + answer); // "\n"
-
-                    wrongSound.start();
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        vibrator.vibrate(VibrationEffect.createOneShot(500,1));
-                    }
-
-                    conBtn.setText("Continue");
-
-                    conBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent testIntent = new Intent(Question1.this, LearnPage.class); // change this to next question
-                            startActivity(testIntent);
-                        }
-                    });
+                    WrongFunction();
 
                 }
             }
@@ -180,4 +133,62 @@ public class Question1 extends AppCompatActivity {
 
 
     }
+
+    void CorrectFunction (){
+        conBtn.setBackgroundColor(Color.rgb(115,230,0));
+        conBtn.setTextColor(Color.WHITE);
+
+        // initilialise layout inflater
+        layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        correctSound.start();
+
+        // new layout, pass success pop up
+        ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.successpopup, null);
+
+        // create pop up window, pass created layout (with, height)
+        popupWindow = new PopupWindow(container, 991,200);
+
+        // show pop up window,
+        popupWindow.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, 50, 1250);
+
+
+
+        conBtn.setText("Continue");
+
+        conBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent testIntent = new Intent(Question1.this, Question2.class); // change this to next question
+                startActivity(testIntent);
+            }
+        });
+    };
+
+    void WrongFunction() {
+        layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.wrongpopup, null);
+        TextView wrongTxt = container.findViewById(R.id.WrongText);
+        popupWindow = new PopupWindow(container, 990,200);
+        popupWindow.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, 50, 1250);
+
+        wrongTxt.setText("Correct answer: " + answer); // "\n"
+
+        wrongSound.start();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createOneShot(500,1));
+        }
+
+        conBtn.setText("Continue");
+
+        conBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent testIntent = new Intent(Question1.this, Question2.class); // change this to next question
+                startActivity(testIntent);
+            }
+        });
+    };
+
 }
