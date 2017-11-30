@@ -4,97 +4,160 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lincolnchawora.mygame.Question2">
+    tools:context="com.example.lincolnchawora.mygame.Question2"
+    android:id="@+id/constraint2">
 
-    <LinearLayout
-        android:id="@+id/topLinear"
-        android:layout_width="380dp"
-        android:layout_height="351dp"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="7dp">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/topLinear"-->
+        <!--android:layout_width="380dp"-->
+        <!--android:layout_height="351dp"-->
+        <!--android:orientation="vertical"-->
+        <!--android:padding="10dp"-->
+        <!--android:paddingLeft="50dp"-->
+        <!--android:paddingRight="50dp"-->
+        <!--android:weightSum="1"-->
+        <!--tools:layout_editor_absoluteY="8dp"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent">-->
 
         <!-- Intro -->
         <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="347dp"
+            android:layout_height="158dp"
             android:gravity="center"
             android:paddingBottom="10dp"
-            android:text="@string/intro" />
+            android:text="@string/intro"
+            android:textSize="30sp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/textView2"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintVertical_bias="0.189"
+            tools:layout_editor_absoluteY="59dp"
+            tools:layout_editor_absoluteX="4dp"
+            app:layout_constraintHorizontal_bias="0.509" />
 
-        <!-- Choices -->
-        <!--<TextView-->
-            <!--android:id="@+id/choice_1"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="5dp"-->
-            <!--android:background="@drawable/choice"-->
-            <!--android:gravity="center"-->
-            <!--android:text="@string/choice_1" />-->
 
         <TextView
-            android:id="@+id/choice_2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/choice_1"
+            android:layout_width="265dp"
+            android:layout_height="29dp"
             android:layout_margin="5dp"
             android:background="@drawable/choice"
             android:gravity="center"
-            android:text="@string/choice_2" />
-
-        <!--<TextView-->
-            <!--android:id="@+id/choice_3"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="5dp"-->
-            <!--android:background="@drawable/choice"-->
-            <!--android:gravity="center"-->
-            <!--android:text="@string/choice_3" />-->
+            android:text="@string/choice_2"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
 
         <!-- Options -->
-        <TextView
-            android:id="@+id/option_1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/option"
-            android:gravity="center"
-            android:text="@string/option_1"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/option_2"
+        android:layout_width="76dp"
+        android:layout_height="33dp"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/option"
+        android:gravity="center"
+        android:text="@string/option_2"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.798" />
 
-        <TextView
-            android:id="@+id/option_2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/option"
-            android:gravity="center"
-            android:text="@string/option_2"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/option_1"
+        android:layout_width="80dp"
+        android:layout_height="34dp"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="0.27"
+        android:background="@drawable/option"
+        android:gravity="center"
+        android:text="@string/option_1"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/option_3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.678" />
 
-        <TextView
-            android:id="@+id/option_3"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/option"
-            android:gravity="center"
-            android:text="@string/option_3"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/option_3"
+        android:layout_width="80dp"
+        android:layout_height="34dp"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/option"
+        android:gravity="center"
+        android:text="@string/option_3"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.681"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
-        <TextView
-            android:id="@+id/option_4"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/option"
-            android:gravity="center"
-            android:text="@string/option_4"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/option_4"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/option"
+        android:gravity="center"
+        android:text="@string/option_4"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/option_3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.682"
+        app:layout_constraintHorizontal_bias="0.517" />
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="187dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="28dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Continue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.997" />
+
+    <!--</LinearLayout>-->
 
 
 </android.support.constraint.ConstraintLayout>
