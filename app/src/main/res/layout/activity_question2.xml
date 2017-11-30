@@ -8,33 +8,93 @@
 
     <LinearLayout
         android:id="@+id/topLinear"
-        android:layout_width="367dp"
-        android:layout_height="246dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        android:layout_width="380dp"
+        android:layout_height="351dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="7dp">
 
-        <Button
-            android:id="@+id/one"
-            android:layout_width="wrap_content"
+        <!-- Intro -->
+        <TextView
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Drag it" />
-    </LinearLayout>
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="@string/intro" />
 
-    <LinearLayout
-        android:id="@+id/bottomLinear"
-        android:layout_width="368dp"
-        android:layout_height="240dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="263dp">
+        <!-- Choices -->
+        <!--<TextView-->
+            <!--android:id="@+id/choice_1"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="@drawable/choice"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/choice_1" />-->
 
         <TextView
-            android:id="@+id/drop"
-            android:layout_width="wrap_content"
+            android:id="@+id/choice_2"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Drop here" />
+            android:layout_margin="5dp"
+            android:background="@drawable/choice"
+            android:gravity="center"
+            android:text="@string/choice_2" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/choice_3"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="@drawable/choice"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/choice_3" />-->
+
+        <!-- Options -->
+        <TextView
+            android:id="@+id/option_1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/option"
+            android:gravity="center"
+            android:text="@string/option_1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/option_2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/option"
+            android:gravity="center"
+            android:text="@string/option_2"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/option_3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/option"
+            android:gravity="center"
+            android:text="@string/option_3"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/option_4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/option"
+            android:gravity="center"
+            android:text="@string/option_4"
+            android:textStyle="bold" />
+
     </LinearLayout>
+
+
 </android.support.constraint.ConstraintLayout>

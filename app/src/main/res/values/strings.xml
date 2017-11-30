@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MyGame</string>
+    <string name="intro">What part of the flower may be brightly coloured to attract insects?</string>
+    <string name="option_1">Petal</string>
+    <string name="option_2">Sepal</string>
+    <string name="option_3">Nectary</string>
+    <string name="option_4">Stamens</string>
+
+    <string name="choice_1">Most favorite</string>
+    <string name="choice_2">-</string>
+    <string name="choice_3">Least favorite</string>
 </resources>
