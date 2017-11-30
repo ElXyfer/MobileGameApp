@@ -125,7 +125,7 @@ public class Question1 extends AppCompatActivity {
                     conBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent testIntent = new Intent(Question1.this, LearnPage.class); // change this to next question
+                            Intent testIntent = new Intent(Question1.this, Question2.class); // change this to next question
                             startActivity(testIntent);
                         }
                     });
