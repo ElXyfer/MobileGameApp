@@ -3,6 +3,8 @@ package com.example.lincolnchawora.mygame;
 import android.content.ClipData; //
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
+import android.os.VibrationEffect;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle; //
@@ -21,7 +23,7 @@ import android.util.Log;
 
 public class Question2 extends AppCompatActivity {
 
-    private TextView option1, option2, option3, option4, choice1;
+    TextView option1, option2, option3, option4, choice1;
     Button conBtn;
 
     PopupWindow popupWindow;
@@ -48,7 +50,7 @@ public class Question2 extends AppCompatActivity {
         option3.setOnTouchListener(new ChoiceTouchListener());
         option4.setOnTouchListener(new ChoiceTouchListener());
 
-        //set drag listeners
+        //set drag listener for target
         choice1.setOnDragListener(new ChoiceDragListener());
 
         conBtn = (Button)findViewById(R.id.button3);
@@ -76,7 +78,7 @@ public class Question2 extends AppCompatActivity {
 
     private class ChoiceDragListener implements View.OnDragListener {
         @Override
-        public boolean onDrag(View v, DragEvent event) {
+        public boolean onDrag(View targetView, DragEvent event) {
 
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
@@ -93,10 +95,10 @@ public class Question2 extends AppCompatActivity {
                     view.setVisibility(View.INVISIBLE);
 
                     //view dragged item is being dropped on
-                    TextView dropTarget = (TextView) v;
+                    TextView dropTarget = (TextView) targetView;
 
                     //view being dragged and dropped
-                    TextView dropped = (TextView) view;
+                    final TextView dropped = (TextView) view;
 
                     //update the text in the target view to reflect the data being dropped
                     dropTarget.setText(dropped.getText());
@@ -117,45 +119,20 @@ public class Question2 extends AppCompatActivity {
                           findViewById(existingID).setVisibility(View.VISIBLE);
                     }
 
-
-
                     //set the tag in the target view to the ID of the view being dropped
                     dropTarget.setTag(dropped.getId());
-
 
                     if(dropTarget.getText().toString().length() > 2) {
                         conBtn.setEnabled(true);
 
-                        //if(dropped.getText().equals()){ // use text from view
-
-                        //}
-
-//                        conBtn.setBackgroundColor(Color.rgb(115,230,0));
-//                        conBtn.setTextColor(Color.WHITE);
-//
-//                        // initilialise layout inflater
-//                        layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-//
-////                        correctSound.start();
-//
-//                        // new layout, pass success pop up
-//                        ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.successpopup, null);
-//
-//                        // create pop up window, pass created layout (with, height)
-//                        popupWindow = new PopupWindow(container, 991,200);
-//
-//                        // show pop up window,
-//                        popupWindow.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, 50, 1250);
-//
-//
-//
-//                        conBtn.setText("Continue");
-
                         conBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent testIntent1 = new Intent(Question2.this, MainActivity.class); // change this to next question
-                                startActivity(testIntent1);
+                            if(dropped.getText().toString().equals("Petal")){ // use text from view
+                                CorrectFunction();
+                            } else {
+                                WrongFunction();
+                            }
                             }
                         });
                     }
@@ -169,4 +146,58 @@ public class Question2 extends AppCompatActivity {
             return true;
         }
     }
+
+    void CorrectFunction() {
+        conBtn.setBackgroundColor(Color.rgb(115,230,0));
+        conBtn.setTextColor(Color.WHITE);
+
+        // initilialise layout inflater
+        layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+//       correctSound.start();
+
+        // new layout, pass success pop up
+        ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.successpopup, null);
+
+        // create pop up window, pass created layout (with, height)
+        popupWindow = new PopupWindow(container, 991,200);
+
+        // show pop up window,
+        popupWindow.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, 50, 1250);
+
+        conBtn.setText("Continue");
+
+        ContinueIntent();
+    }
+
+    void WrongFunction() {
+        layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.wrongpopup, null);
+        TextView wrongTxt = container.findViewById(R.id.WrongText);
+        popupWindow = new PopupWindow(container, 990,200);
+        popupWindow.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, 50, 1250);
+
+        wrongTxt.setText("Correct answer: " + option1.getText().toString()); // "\n"
+
+//        wrongSound.start();
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            vibrator.vibrate(VibrationEffect.createOneShot(500,1));
+//        }
+
+        conBtn.setText("Continue");
+
+        ContinueIntent();
+
+    };
+
+    void ContinueIntent(){
+        conBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent testIntent1 = new Intent(Question2.this, MainActivity.class); // change this to next question
+                startActivity(testIntent1);
+            }
+        });
+    };
 }
