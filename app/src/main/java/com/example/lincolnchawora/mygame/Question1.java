@@ -50,33 +50,19 @@ public class Question1 extends AppCompatActivity {
         q1Txt.setTextSize(30);
         q1Txt.setTextColor(Color.BLACK);
 
-        imgView = (ImageView)findViewById(R.id.imageView);
+        imgView = (ImageView)findViewById(R.id.q1_Image);
         textBox = (EditText)findViewById(R.id.editText);
 
-        conBtn = (Button)findViewById(R.id.buttonTest);
-        conBtn.setText("Check answer");
+        conBtn = (Button)findViewById(R.id.continueQ1);
 
         constraintLayout = (ConstraintLayout) findViewById(R.id.constraint);
 
         conBtn.setEnabled(false);
 
-
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
-
 
         correctSound = MediaPlayer.create(this, R.raw.correct);
         wrongSound = MediaPlayer.create(this, R.raw.wrong);
-
-        //InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-//
-//        if(imm.isAcceptingText()) {
-//            q1Txt.setTextColor(Color.RED);
-//        } else {
-//            q1Txt.setTextColor(Color.BLUE);
-//        }
-
-        //final View constraintLayout = findViewById(R.id.constraint);
 
 
         textBox.setOnKeyListener(new View.OnKeyListener() {
@@ -112,11 +98,6 @@ public class Question1 extends AppCompatActivity {
             }
         });
 
-//        if(imm.isAcceptingText()) {
-//            Log.i("me tag","Software Keyboard was shown");
-//        } else {
-//            Log.i("me tag", "Software Keyboard was not shown");
-//        }
 
         textBox.setOnKeyListener(new View.OnKeyListener() {
             @Override

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
 //                ding.start();
 
-                Intent page1Intent = new Intent(MainActivity.this, Question2.class);
+                Intent page1Intent = new Intent(MainActivity.this, Question3.class);
                 startActivity(page1Intent);
             }
         });
