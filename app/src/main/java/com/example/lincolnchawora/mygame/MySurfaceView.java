@@ -4,13 +4,16 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import android.support.v4.content.res.ResourcesCompat;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * Created by lincolnchawora on 01/12/2017.
@@ -23,17 +26,16 @@ public class MySurfaceView extends SurfaceView implements Runnable {
     boolean isRunning = true;
     Paint pWhite;
     GameObject myObject;
+    ArrayList<GameObject> gameObjects = new ArrayList<>();
+    Player player;
 
-
-
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        ViewGroup.LayoutParams lp = this.getLayoutParams();
-        lp.width = 100;
-        this.setLayoutParams(lp);
-    }
+    OnTouchListener touchListener = new OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            player.moveToo(event.getX(), event.getY());
+            return true;
+        }
+    };
 
     public MySurfaceView(Context context) {
         super(context);
@@ -43,7 +45,6 @@ public class MySurfaceView extends SurfaceView implements Runnable {
 
         myHolder = getHolder();
 
-
         myThread = new Thread(this);
         myThread.start();
 
@@ -51,23 +52,60 @@ public class MySurfaceView extends SurfaceView implements Runnable {
 
         myObject = new GameObject(100,100,10,10,drawable);
 
+        gameObjects.add(new GameObject(100, 500, 10, -10, ContextCompat.getDrawable(context, R.drawable.cry)));
+
+        gameObjects.add(new GameObject(500, 500, -10, 10, ContextCompat.getDrawable(context, R.drawable.woman)));
+
+        gameObjects.add(new GameObject(300, 300, 10, 10, ContextCompat.getDrawable(context, R.drawable.fish)));
+
+        player = new Player(300, 300, -10, -10, ResourcesCompat.getDrawable(getResources(), R.drawable.man, null));
+
+        gameObjects.add(player);
+
+        this.setOnTouchListener(touchListener);
     }
+
+
 
 
 
     @Override
     public void run(){
-        while(isRunning)
-        {
-            if(!myHolder.getSurface().isValid())
+        while(isRunning) {
+            if (!myHolder.getSurface().isValid())
                 continue;
             Canvas canvas = myHolder.lockCanvas();
 
-            canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight(), pWhite);
+            canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), pWhite);
             myObject.Move(canvas);
+
+
+            for (GameObject gameObject : gameObjects)
+                gameObject.Move(canvas);
+
             myHolder.unlockCanvasAndPost(canvas);
         }
 
 
     }
+
+//    public void stop() {
+//        isRunning = false;
+//
+//        while (true){
+//            try {
+//                myThread.join();
+//                break;
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            break;
+//        }
+//    }
+//
+//    public void start() {
+//        isRunning = true;
+//        myThread = new Thread(this);
+//        myThread.start();
+//    }
 }

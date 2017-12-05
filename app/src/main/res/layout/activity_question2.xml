@@ -50,7 +50,7 @@
             android:layout_margin="5dp"
             android:background="@drawable/choice"
             android:gravity="center"
-            android:text="@string/choice_2"
+            android:text="@string/choice_1"
             android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginRight="8dp"

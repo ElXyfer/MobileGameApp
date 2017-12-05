@@ -5,8 +5,10 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,8 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
 //                ding.start();
 
-                Intent page1Intent = new Intent(MainActivity.this, Question3.class);
+                Intent page1Intent = new Intent(MainActivity.this, Question1.class);
+//                int val = 123;
+//                page1Intent.putExtra("MyVarName", val);
                 startActivity(page1Intent);
+//                finish();
             }
         });
 

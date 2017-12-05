@@ -20,15 +20,32 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.graphics.Typeface; //
 import android.util.Log;
+import android.widget.Toast;
 
 public class Question2 extends AppCompatActivity {
 
-    TextView option1, option2, option3, option4, choice1;
+    TextView option1, option2, option3, option4, choice1, choice2;
     Button conBtn;
 
     PopupWindow popupWindow;
     LayoutInflater layoutInflater;
     ConstraintLayout constraintLayout;
+
+    View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent Q2Intent = new Intent(Question2.this, Question3.class); // change this to next question
+
+            String val2 = "test";
+            Q2Intent.putExtra("Q2Answer", val2);
+
+            String Ans1;
+            Q2Intent.putExtra("Q1Test", Ans1);
+
+
+            startActivity(Q2Intent);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,23 +58,49 @@ public class Question2 extends AppCompatActivity {
         option3 = (TextView)findViewById(R.id.option_3);
         option4 = (TextView)findViewById(R.id.option_4);
 
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null){
+
+
+
+            String Ans1 = extras.getString("Q1Answer");
+            Log.i("My tag", "messaage" + Ans1);
+            Toast.makeText(Question2.this, "Previous answer was: "+ Ans1, Toast.LENGTH_LONG).show();
+
+
+        }
+
+
+
         //views to drop onto
         choice1 = (TextView)findViewById(R.id.choice_1);
+//        choice2 = (TextView)findViewById(R.id.choice_2);
 
         //set touch listeners
         option1.setOnTouchListener(new ChoiceTouchListener());
         option2.setOnTouchListener(new ChoiceTouchListener());
         option3.setOnTouchListener(new ChoiceTouchListener());
         option4.setOnTouchListener(new ChoiceTouchListener());
+        choice1.setOnTouchListener(new ChoiceTouchListener());
+//        choice2.setOnTouchListener(new ChoiceTouchListener());
 
         //set drag listener for target
         choice1.setOnDragListener(new ChoiceDragListener());
+//        choice2.setOnDragListener(new ChoiceDragListener());
+
+//        option1.setOnDragListener(new ChoiceDragListener());
+//        option2.setOnDragListener(new ChoiceDragListener());
+//        option3.setOnDragListener(new ChoiceDragListener());
+//        option4.setOnDragListener(new ChoiceDragListener());
 
         conBtn = (Button)findViewById(R.id.button3);
 
         conBtn.setEnabled(false);
 
         constraintLayout = (ConstraintLayout) findViewById(R.id.constraint2);
+
+
     }
 
     private final class ChoiceTouchListener implements View.OnTouchListener {
@@ -93,6 +136,7 @@ public class Question2 extends AppCompatActivity {
 
                     //stop displaying the view where it was before it was dragged
                     view.setVisibility(View.INVISIBLE);
+//                    view.setEnabled(false);
 
                     //view dragged item is being dropped on
                     TextView dropTarget = (TextView) targetView;
@@ -167,7 +211,7 @@ public class Question2 extends AppCompatActivity {
 
         conBtn.setText("Continue");
 
-        ContinueIntent();
+        conBtn.setOnClickListener(clickListener);
     }
 
     void WrongFunction() {
@@ -187,17 +231,7 @@ public class Question2 extends AppCompatActivity {
 
         conBtn.setText("Continue");
 
-        ContinueIntent();
+        conBtn.setOnClickListener(clickListener);
 
-    };
-
-    void ContinueIntent(){
-        conBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent testIntent1 = new Intent(Question2.this, MainActivity.class); // change this to next question
-                startActivity(testIntent1);
-            }
-        });
     };
 }
