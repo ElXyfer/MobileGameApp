@@ -10,6 +10,7 @@ import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Question1 extends AppCompatActivity {
 
@@ -36,14 +38,24 @@ public class Question1 extends AppCompatActivity {
     PopupWindow popupWindow;
     LayoutInflater layoutInflater;
     ConstraintLayout constraintLayout;
+    View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent Q1Intent = new Intent(Question1.this, Question2.class); // change this to next question
 
+            String Ans1 = answer;
+            Q1Intent.putExtra("Q1Answer", Ans1);
+            startActivity(Q1Intent);
+//                finish();
+        }
+    };
 
-    @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question1);
 
         answer = "green";
+
 
         q1Txt = (TextView)findViewById(R.id.q1Text);
         q1Txt.setText("Name the highlighted part of the flower");
@@ -63,6 +75,18 @@ public class Question1 extends AppCompatActivity {
 
         correctSound = MediaPlayer.create(this, R.raw.correct);
         wrongSound = MediaPlayer.create(this, R.raw.wrong);
+
+        Bundle extras = getIntent().getExtras();
+
+
+
+        if(extras != null){
+
+            Log.i("Muy log ", "work work " + extras.getInt("MyVarName"));
+            int val = extras.getInt("MyVarName");
+            Toast.makeText(Question1.this, "val="+val, Toast.LENGTH_LONG).show();
+        }
+
 
 
         textBox.setOnKeyListener(new View.OnKeyListener() {
@@ -93,6 +117,7 @@ public class Question1 extends AppCompatActivity {
                 } else if(!textBox.getText().toString().toLowerCase().equals(answer)) {
 
                     WrongFunction();
+                    answer = textBox.getText().toString();
 
                 }
             }
@@ -133,17 +158,9 @@ public class Question1 extends AppCompatActivity {
         // show pop up window,
         popupWindow.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, 50, 1250);
 
-
-
         conBtn.setText("Continue");
+        conBtn.setOnClickListener(clickListener);
 
-        conBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent testIntent = new Intent(Question1.this, Question2.class); // change this to next question
-                startActivity(testIntent);
-            }
-        });
     };
 
     void WrongFunction() {
@@ -162,14 +179,9 @@ public class Question1 extends AppCompatActivity {
         }
 
         conBtn.setText("Continue");
+        conBtn.setOnClickListener(clickListener);
 
-        conBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent testIntent = new Intent(Question1.this, Question2.class); // change this to next question
-                startActivity(testIntent);
-            }
-        });
+
     };
 
 }
