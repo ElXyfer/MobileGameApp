@@ -22,11 +22,10 @@ public class Question3 extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         if(extras != null){
+            String Ans1 = extras.getString("Q1Answer");
+            String Answer2 = extras.getString("Q2Answer");
 
-            Log.i("Muy log ", "work work " + extras.getInt("Q1Answer"));
-            String val = extras.getString("Q1Answer");
-//            String val2 = extras.getString("Q2Answer");
-            Toast.makeText(Question3.this, "val="+ val, Toast.LENGTH_LONG).show();
+            Toast.makeText(Question3.this, "Question 1 Answer = "+ Ans1 + " Question 2 Answer = "+ Answer2, Toast.LENGTH_LONG).show();
         }
 
         mySurfaceView = new MySurfaceView(this);
@@ -36,8 +35,6 @@ public class Question3 extends AppCompatActivity {
 
         content.addView(mySurfaceView); // workshop 6
 
-
-
 //        switch (id) {
 //            case R.id.item1:
 //                mySurfaceView.stop();
@@ -46,10 +43,6 @@ public class Question3 extends AppCompatActivity {
 //                mySurfaceView.start();
 //                return true;
 //        }
-
-
-
-
 
     }
 }
