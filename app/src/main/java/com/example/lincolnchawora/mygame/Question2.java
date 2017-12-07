@@ -67,28 +67,17 @@ public class Question2 extends AppCompatActivity {
             Ans1 = extras.getString("Q1Answer");
         }
 
-
-
         //views to drop onto
         choice1 = (TextView)findViewById(R.id.choice_1);
-//        choice2 = (TextView)findViewById(R.id.choice_2);
 
         //set touch listeners
         option1.setOnTouchListener(new ChoiceTouchListener());
         option2.setOnTouchListener(new ChoiceTouchListener());
         option3.setOnTouchListener(new ChoiceTouchListener());
         option4.setOnTouchListener(new ChoiceTouchListener());
-        choice1.setOnTouchListener(new ChoiceTouchListener());
-//        choice2.setOnTouchListener(new ChoiceTouchListener());
 
         //set drag listener for target
         choice1.setOnDragListener(new ChoiceDragListener());
-//        choice2.setOnDragListener(new ChoiceDragListener());
-
-//        option1.setOnDragListener(new ChoiceDragListener());
-//        option2.setOnDragListener(new ChoiceDragListener());
-//        option3.setOnDragListener(new ChoiceDragListener());
-//        option4.setOnDragListener(new ChoiceDragListener());
 
         conBtn = (Button)findViewById(R.id.button3);
 
@@ -171,8 +160,6 @@ public class Question2 extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                             if(Answer2.equals("Sepal")){ // use text from view
-
-
                                 CorrectFunction(Answer2);
 
 

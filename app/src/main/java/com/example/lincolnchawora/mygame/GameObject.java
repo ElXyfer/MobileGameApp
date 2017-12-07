@@ -18,6 +18,8 @@ public class GameObject extends View {
     protected float x, y, dx, dy;
     Paint p = new Paint();
     Rect r;
+    float originalxSpeed, originalySpeed;
+    boolean hasStopped;
 
 
     public GameObject(Context context, float  x, float y, float dx, float dy, Drawable image) {
@@ -26,6 +28,8 @@ public class GameObject extends View {
         this.y = y;
         this.dx = dx;
         this.dy = dy;
+        this.originalxSpeed = dx;
+        this.originalySpeed = dy;
         this.image = image;
         p.setColor(Color.RED);
         p.setTextSize(100);
