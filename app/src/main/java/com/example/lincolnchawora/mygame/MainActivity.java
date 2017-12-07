@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent SplashIntent = new Intent(MainActivity.this, Question3.class );
                 startActivity(SplashIntent);
-                finish();
+//                finish();
 
             }
         }, SplashTimer);

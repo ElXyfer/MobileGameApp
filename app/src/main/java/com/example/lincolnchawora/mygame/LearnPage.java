@@ -27,7 +27,7 @@ public class LearnPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent page2Intent = new Intent(LearnPage.this, Question1.class);
                 startActivity(page2Intent);
-                finish();
+//                finish();
             }
         });
 
