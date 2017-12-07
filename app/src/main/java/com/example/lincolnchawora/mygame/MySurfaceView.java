@@ -7,12 +7,12 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.ViewGroup;
-
+import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
@@ -29,13 +29,6 @@ public class MySurfaceView extends SurfaceView implements Runnable {
     ArrayList<GameObject> gameObjects = new ArrayList<>();
     Player player;
 
-    OnTouchListener touchListener = new OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            player.moveToo(event.getX(), event.getY());
-            return true;
-        }
-    };
 
     public MySurfaceView(Context context) {
         super(context);
@@ -48,25 +41,28 @@ public class MySurfaceView extends SurfaceView implements Runnable {
         myThread = new Thread(this);
         myThread.start();
 
-        Drawable drawable = ContextCompat.getDrawable(context, R.drawable.table);
+        Drawable drawable = ContextCompat.getDrawable(context, R.drawable.calcium);
 
-        myObject = new GameObject(100,100,10,10,drawable);
+        myObject = new GameObject(getContext(),100,100,10,10,drawable);
 
-        gameObjects.add(new GameObject(100, 500, 10, -10, ContextCompat.getDrawable(context, R.drawable.cry)));
+        gameObjects.add(new GameObject(getContext(), 100, 500, 10, -10, ContextCompat.getDrawable(context, R.drawable.copper)));
 
-        gameObjects.add(new GameObject(500, 500, -10, 10, ContextCompat.getDrawable(context, R.drawable.woman)));
+        gameObjects.add(new GameObject(getContext(), 500, 500, -10, 10, ContextCompat.getDrawable(context, R.drawable.magnesium)));
 
-        gameObjects.add(new GameObject(300, 300, 10, 10, ContextCompat.getDrawable(context, R.drawable.fish)));
+        this.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
 
-        player = new Player(300, 300, -10, -10, ResourcesCompat.getDrawable(getResources(), R.drawable.man, null));
 
-        gameObjects.add(player);
+                if(myObject.isTouchInRectangle(event.getX(),event.getY()))
+                {
+                    Log.d("LC", "touched this");
+                }
+                return false;
+            }
+        });
 
-        this.setOnTouchListener(touchListener);
     }
-
-
-
 
 
     @Override
@@ -79,10 +75,7 @@ public class MySurfaceView extends SurfaceView implements Runnable {
             canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), pWhite);
             myObject.Move(canvas);
 
-
-            for (GameObject gameObject : gameObjects)
-                gameObject.Move(canvas);
-
+//
             myHolder.unlockCanvasAndPost(canvas);
         }
 

@@ -1,28 +1,37 @@
 package com.example.lincolnchawora.mygame;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
 /**
  * Created by lincolnchawora on 01/12/2017.
  */
 
-public class GameObject {
+public class GameObject extends View {
     protected float x, y, dx, dy;
     Paint p = new Paint();
+    Rect r;
 
 
-    public GameObject(float x, float y, float dx, float dy, Drawable image) {
+    public GameObject(Context context, float  x, float y, float dx, float dy, Drawable image) {
+        super(context);
         this.x = x;
         this.y = y;
         this.dx = dx;
         this.dy = dy;
         this.image = image;
-
         p.setColor(Color.RED);
         p.setTextSize(100);
+
+        r = image.copyBounds();
+
     }
 
     void Move (Canvas canvas) {
@@ -34,12 +43,29 @@ public class GameObject {
             dy=-dy;
 //       canvas.drawText("Hello", x-100, y+10, p);
 
-        image.setBounds((int)x-200,(int)y,(int)(x+200f),(int)(y+200f));
-
+        image.setBounds((int)x-200,(int)y,(int)(x+10f),(int)(y+170f));
         image.draw(canvas);
+
+        r = image.copyBounds();
 
     }
 
+    public boolean isTouchInRectangle(float tx, float ty)
+    {
+        if(
+                tx>(x-200) && tx<(x+10f)
+
+            &&
+
+            ty>y && ty<(y+170f)
+        )
+
+        return true;
+
+        else
+
+            return false;
+    }
 
     protected Drawable image;
 

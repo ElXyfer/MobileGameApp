@@ -1,5 +1,6 @@
 package com.example.lincolnchawora.mygame;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 
@@ -9,8 +10,8 @@ import android.graphics.drawable.Drawable;
 
 public class Player extends GameObject {
 
-    public Player(float x, float y, float dx, float dy, Drawable image) {
-        super(x, y, dx, dy, image);
+    public Player(Context context, float x, float y, float dx, float dy, Drawable image) {
+        super(context, x, y, dx, dy, image);
     }
 
 //    @Override

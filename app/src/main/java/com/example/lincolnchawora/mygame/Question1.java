@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 public class Question1 extends AppCompatActivity {
 
-    TextView q1Txt;
     ImageView imgView;
     EditText textBox;
     Button conBtn;
@@ -46,7 +45,7 @@ public class Question1 extends AppCompatActivity {
             String Ans1 = answer;
             Q1Intent.putExtra("Q1Answer", Ans1);
             startActivity(Q1Intent);
-//                finish();
+            finish();
         }
     };
 
@@ -56,11 +55,6 @@ public class Question1 extends AppCompatActivity {
 
         answer = "green";
 
-
-        q1Txt = (TextView)findViewById(R.id.q1Text);
-        q1Txt.setText("Name the highlighted part of the flower");
-        q1Txt.setTextSize(30);
-        q1Txt.setTextColor(Color.BLACK);
 
         imgView = (ImageView)findViewById(R.id.q1_Image);
         textBox = (EditText)findViewById(R.id.editText);

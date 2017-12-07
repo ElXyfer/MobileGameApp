@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">MyGame</string>
-    <string name="intro">What part of the flower may be brightly coloured to attract insects?</string>
+    <string name="app_name">Plantology</string>
+    <string name="splashText">Plantology</string>
+
+    <string name="question1">Name the highlighted part of the flower</string>
+    <string name="question2">What part of the flower protects an unopened flower?</string>
     <string name="option_1">Petal</string>
     <string name="option_2">Sepal</string>
     <string name="option_3">Nectary</string>
@@ -9,4 +12,7 @@
     <string name="choice_1">-</string>
     <string name="choice_2">-</string>
     <string name="choice_3">Least favorite</string>
+
+    <!-- Button text -->
+    <string name="checkAnswer">Check Answer</string>
 </resources>

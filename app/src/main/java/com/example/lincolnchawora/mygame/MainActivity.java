@@ -2,43 +2,46 @@ package com.example.lincolnchawora.mygame;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button H_btn;
-    MediaPlayer ding;
+    static int SplashTimer;
+    AnimationDrawable animationLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        H_btn = (Button) findViewById(R.id.startBtn);
+        final ImageView animation = (ImageView) findViewById(R.id.animView);
 
-        ding = MediaPlayer.create(this, R.raw.correct);
+        animationLoading = (AnimationDrawable)animation.getDrawable();
 
-        H_btn.setOnClickListener(new View.OnClickListener() {
+        // starts animation
+        animationLoading.start();
+
+        // timer duration
+        SplashTimer = 50;
+
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View view) {
-                H_btn.setTextColor(Color.GREEN);
+            public void run() {
 
-//                ding.start();
+                Intent SplashIntent = new Intent(MainActivity.this, Question3.class );
+                startActivity(SplashIntent);
+                finish();
 
-                Intent page1Intent = new Intent(MainActivity.this, Question1.class);
-//                int val = 123;
-//                page1Intent.putExtra("MyVarName", val);
-                startActivity(page1Intent);
-//                finish();
             }
-        });
-
-
+        }, SplashTimer);
     }
 }
