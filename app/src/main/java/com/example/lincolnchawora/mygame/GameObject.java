@@ -19,10 +19,10 @@ public class GameObject extends View {
     Paint p = new Paint();
     Rect r;
     float originalxSpeed, originalySpeed;
-    boolean hasStopped;
+    boolean hasStopped, isCorrect;
 
 
-    public GameObject(Context context, float  x, float y, float dx, float dy, Drawable image) {
+    public GameObject(Context context, float  x, float y, float dx, float dy, Drawable image, boolean isCorrect) {
         super(context);
         this.x = x;
         this.y = y;
@@ -33,10 +33,13 @@ public class GameObject extends View {
         this.image = image;
         p.setColor(Color.RED);
         p.setTextSize(100);
+        this.isCorrect = isCorrect;
+
 
         r = image.copyBounds();
 
     }
+
 
     void Move (Canvas canvas) {
         x+=dx;
@@ -45,7 +48,6 @@ public class GameObject extends View {
             dx=-dx;
         if(y>canvas.getHeight() || y<0)
             dy=-dy;
-//       canvas.drawText("Hello", x-100, y+10, p);
 
         image.setBounds((int)x-200,(int)y,(int)(x+10f),(int)(y+170f));
         image.draw(canvas);

@@ -25,7 +25,7 @@ public class LearnPage extends AppCompatActivity {
         learnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent page2Intent = new Intent(LearnPage.this, Question1.class);
+                Intent page2Intent = new Intent(LearnPage.this, Question3.class);
                 startActivity(page2Intent);
 //                finish();
             }

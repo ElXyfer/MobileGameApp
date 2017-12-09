@@ -53,7 +53,7 @@ public class Question1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question1);
 
-        answer = "green";
+        answer = "petal";
 
 
         imgView = (ImageView)findViewById(R.id.q1_Image);
@@ -104,7 +104,7 @@ public class Question1 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(textBox.getText().toString().toLowerCase().equals(answer)){
+                if(textBox.getText().toString().toLowerCase().replaceAll(" ", "").equals(answer)){
 
                     CorrectFunction();
 
