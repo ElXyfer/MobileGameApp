@@ -25,10 +25,8 @@ public class MySurfaceView extends SurfaceView implements Runnable {
     Thread myThread;
     boolean isRunning = true;
     Paint pWhite;
-    Paint pBlack;
     GameObject myObject;
     ArrayList<GameObject> gameObjects = new ArrayList<>();
-    Player player;
     Question3 activity;
 
 
@@ -40,10 +38,6 @@ public class MySurfaceView extends SurfaceView implements Runnable {
         pWhite = new Paint();
         pWhite.setColor(Color.WHITE);
 
-        pBlack = new Paint();
-        pBlack.setColor(Color.BLACK);
-        pBlack.setTextSize(100);
-
         myHolder = getHolder();
 
         myThread = new Thread(this);
@@ -51,26 +45,20 @@ public class MySurfaceView extends SurfaceView implements Runnable {
 
         Drawable drawable = ContextCompat.getDrawable(context, R.drawable.calcium);
 
-
-        myObject = new GameObject(getContext(), 100, 100, 10, 10, drawable);
+        myObject = new GameObject(getContext(), 700, 700, 10, -10, drawable, false);
 
         gameObjects.add(myObject);
 
-        gameObjects.add(new GameObject(getContext(), 100, 500, 10, -10, ContextCompat.getDrawable(context, R.drawable.copper)));
+        gameObjects.add(new GameObject(getContext(), 100, 500, 10, -10, ContextCompat.getDrawable(context, R.drawable.copper), false));
 
-        gameObjects.add(new GameObject(getContext(), 500, 500, -10, 10, ContextCompat.getDrawable(context, R.drawable.magnesium)));
-
+        gameObjects.add(new GameObject(getContext(), 500, 500, -10, 10, ContextCompat.getDrawable(context, R.drawable.magnesium), true));
 
         this.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
-
-//                if(myObject.isTouchInRectangle(event.getX(),event.getY()))
-//                {
-//                    Log.d("LC", "touched this");
-//                }
-
+                gameObjects.get(0).setTag(1);
+                gameObjects.get(1).setTag(2);
+                gameObjects.get(2).setTag(3);
                 for (GameObject object : gameObjects) {
 
                     // checks is the pointer is in line with any of the game objects
@@ -81,16 +69,22 @@ public class MySurfaceView extends SurfaceView implements Runnable {
 
                         object.hasStopped = true;
 
-                        if(object.equals(gameObjects.get(0))){
-                            Log.d("LC", "Calcium");
-                            Toast.makeText(getContext(), "This is calcium!", Toast.LENGTH_LONG).show();
+                        if (object.hasStopped){
                             activity.btn.setEnabled(true);
+                        }
+
+
+
+                        if(object.equals(gameObjects.get(0))){
+                            Toast.makeText(getContext(), "This is calcium!", Toast.LENGTH_SHORT).show();
+
                         } else if(object.equals(gameObjects.get(1))) {
-                            Log.d("LC", "Copper");
-                            Toast.makeText(getContext(), "This is copper!", Toast.LENGTH_LONG).show();
+
+                            Toast.makeText(getContext(), "This is copper!", Toast.LENGTH_SHORT).show();
                         } else if(object.equals(gameObjects.get(2))) {
-                            Log.d("LC", "Magnesium");
-                            Toast.makeText(getContext(), "This is magnesium!", Toast.LENGTH_LONG).show();
+
+                            Toast.makeText(getContext(), "This is magnesium!", Toast.LENGTH_SHORT).show();
+
                         }
                     } else {
                         object.hasStopped = false;
@@ -114,7 +108,7 @@ public class MySurfaceView extends SurfaceView implements Runnable {
             Canvas canvas = myHolder.lockCanvas();
 
             canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), pWhite);
-            canvas.drawText("Which mineral ions \n are needed for chlorophyll in plants?", canvas.getWidth() / 14, canvas.getHeight() / 14, pBlack);
+            //canvas.drawText("Which mineral ions \n are needed for chlorophyll in plants?", canvas.getWidth() / 14, canvas.getHeight() / 14, pBlack);
             myObject.Move(canvas);
 
             for (GameObject gameObject : gameObjects) {
@@ -124,26 +118,6 @@ public class MySurfaceView extends SurfaceView implements Runnable {
             myHolder.unlockCanvasAndPost(canvas);
         }
 
-
     }
 
-//    public void stop() {
-//        isRunning = false;
-//
-//        while (true){
-//            try {
-//                myThread.join();
-//                break;
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            break;
-//        }
-//    }
-//
-//    public void start() {
-//        isRunning = true;
-//        myThread = new Thread(this);
-//        myThread.start();
-//    }
 }

@@ -37,7 +37,7 @@ public class Question2 extends AppCompatActivity {
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent Q2Intent = new Intent(Question2.this, Question3.class); // change this to next question
+            Intent Q2Intent = new Intent(Question2.this, LearnPage.class); // change this to next question
 
             Q2Intent.putExtra("Q1Answer", Ans1);
 
