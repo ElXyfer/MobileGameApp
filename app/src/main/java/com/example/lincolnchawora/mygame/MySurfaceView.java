@@ -29,7 +29,6 @@ public class MySurfaceView extends SurfaceView implements Runnable {
     ArrayList<GameObject> gameObjects = new ArrayList<>();
     Question3 activity;
 
-
     public MySurfaceView(Context context, final Question3 activity) {
         super(context);
 
@@ -40,6 +39,7 @@ public class MySurfaceView extends SurfaceView implements Runnable {
 
         myHolder = getHolder();
 
+        // instantiate & start thread
         myThread = new Thread(this);
         myThread.start();
 
@@ -47,50 +47,49 @@ public class MySurfaceView extends SurfaceView implements Runnable {
 
         myObject = new GameObject(getContext(), 700, 700, 10, -10, drawable, false);
 
+        // adds my object(s) to array
         gameObjects.add(myObject);
 
         gameObjects.add(new GameObject(getContext(), 100, 500, 10, -10, ContextCompat.getDrawable(context, R.drawable.copper), false));
 
         gameObjects.add(new GameObject(getContext(), 500, 500, -10, 10, ContextCompat.getDrawable(context, R.drawable.magnesium), true));
 
+
         this.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                gameObjects.get(0).setTag(1);
-                gameObjects.get(1).setTag(2);
-                gameObjects.get(2).setTag(3);
+
+                // executes for each game object in the array
                 for (GameObject object : gameObjects) {
 
-                    // checks is the pointer is in line with any of the game objects
+                    // checks if the pointer is in line with any of the game objects
                     if (object.isTouchInRectangle(event.getX(), event.getY()) && !object.hasStopped) {
 
+                        // set speeds to 0
                         object.dx = 0;
                         object.dy = 0;
 
                         object.hasStopped = true;
 
-                        if (object.hasStopped){
-                            activity.btn.setEnabled(true);
-                        }
-
+                            if(object.hasStopped){
+                                activity.btn.setEnabled(true);
+                            }
 
 
                         if(object.equals(gameObjects.get(0))){
                             Toast.makeText(getContext(), "This is calcium!", Toast.LENGTH_SHORT).show();
-
                         } else if(object.equals(gameObjects.get(1))) {
-
                             Toast.makeText(getContext(), "This is copper!", Toast.LENGTH_SHORT).show();
                         } else if(object.equals(gameObjects.get(2))) {
-
                             Toast.makeText(getContext(), "This is magnesium!", Toast.LENGTH_SHORT).show();
-
                         }
                     } else {
                         object.hasStopped = false;
+
                         object.dx = object.originalxSpeed;
                         object.dy = object.originalySpeed;
                     }
+
 
                 }
                 return false;
@@ -107,8 +106,7 @@ public class MySurfaceView extends SurfaceView implements Runnable {
                 continue;
             Canvas canvas = myHolder.lockCanvas();
 
-            canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), pWhite);
-            //canvas.drawText("Which mineral ions \n are needed for chlorophyll in plants?", canvas.getWidth() / 14, canvas.getHeight() / 14, pBlack);
+            canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight(), pWhite);
             myObject.Move(canvas);
 
             for (GameObject gameObject : gameObjects) {
@@ -119,5 +117,7 @@ public class MySurfaceView extends SurfaceView implements Runnable {
         }
 
     }
+
+
 
 }

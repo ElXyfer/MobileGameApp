@@ -35,7 +35,6 @@ public class GameObject extends View {
         p.setTextSize(100);
         this.isCorrect = isCorrect;
 
-
         r = image.copyBounds();
 
     }
