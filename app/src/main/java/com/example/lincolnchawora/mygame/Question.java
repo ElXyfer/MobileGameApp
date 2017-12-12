@@ -58,13 +58,17 @@ public class Question extends AppCompatActivity {
 //        textBox = (EditText)findViewById(R.id.editText);
 
 
-        constraintLayout = (ConstraintLayout) findViewById(R.id.constraint);
+//        constraintLayout = (ConstraintLayout) findViewById(R.id.constraint);
 //        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 //
-//        correctSound = MediaPlayer.create(this, R.raw.correct);
-//        wrongSound = MediaPlayer.create(this, R.raw.wrong);
+        correctSound = MediaPlayer.create(this, R.raw.correct);
+        wrongSound = MediaPlayer.create(this, R.raw.wrong);
 
     }
+
+    final public void CorrectSound(){
+        correctSound.start();
+    };
 
     void Correct (){
 //        conBtn.setBackgroundColor(Color.rgb(115,230,0));

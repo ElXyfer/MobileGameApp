@@ -31,15 +31,15 @@ public class MainActivity extends AppCompatActivity {
         animationLoading.start();
 
         // timer duration
-        SplashTimer = 50;
+        SplashTimer = 3500;
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                Intent SplashIntent = new Intent(MainActivity.this, Question3.class );
+                Intent SplashIntent = new Intent(MainActivity.this, Question1.class );
                 startActivity(SplashIntent);
-//                finish();
+                finish();
 
             }
         }, SplashTimer);

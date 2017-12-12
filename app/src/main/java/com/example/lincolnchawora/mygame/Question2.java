@@ -3,8 +3,10 @@ package com.example.lincolnchawora.mygame;
 import android.content.ClipData; //
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle; //
@@ -26,8 +28,9 @@ public class Question2 extends AppCompatActivity {
 
     TextView option1, option2, option3, option4, choice1, choice2;
     Button conBtn;
-    String Ans1;
-    String Answer2;
+    String Ans1, Answer2;
+    MediaPlayer correctSound, wrongSound;
+    Vibrator vibrator;
 
     PopupWindow popupWindow;
     LayoutInflater layoutInflater;
@@ -37,7 +40,7 @@ public class Question2 extends AppCompatActivity {
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent Q2Intent = new Intent(Question2.this, LearnPage.class); // change this to next question
+            Intent Q2Intent = new Intent(Question2.this, Question3.class); // change this to next question
 
             Q2Intent.putExtra("Q1Answer", Ans1);
 
@@ -84,6 +87,9 @@ public class Question2 extends AppCompatActivity {
         conBtn.setEnabled(false);
 
         constraintLayout = (ConstraintLayout) findViewById(R.id.constraint2);
+
+        correctSound = MediaPlayer.create(this, R.raw.correct);
+        wrongSound = MediaPlayer.create(this, R.raw.wrong);
 
 
     }
@@ -187,7 +193,8 @@ public class Question2 extends AppCompatActivity {
         // initilialise layout inflater
         layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
 
-//       correctSound.start();
+       correctSound.start();
+
 
         // new layout, pass success pop up
         ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.successpopup, null);
@@ -215,11 +222,9 @@ public class Question2 extends AppCompatActivity {
 
         wrongTxt.setText("Correct answer: " + option2.getText().toString()); // "\n"
 
-//        wrongSound.start();
+        wrongSound.start();
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            vibrator.vibrate(VibrationEffect.createOneShot(500,1));
-//        }
+        vibrator.vibrate(VibrationEffect.createOneShot(500,1));
 
         Answer2 = answer;
 
@@ -228,4 +233,13 @@ public class Question2 extends AppCompatActivity {
         conBtn.setOnClickListener(clickListener);
 
     };
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if(popupWindow != null){
+            popupWindow.dismiss();
+            popupWindow = null;
+        }
+    }
 }

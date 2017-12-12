@@ -29,8 +29,7 @@ public class Question1 extends AppCompatActivity {
     EditText textBox;
     Button conBtn;
     String answer;
-    MediaPlayer correctSound;
-    MediaPlayer wrongSound;
+    MediaPlayer correctSound, wrongSound;
     Vibrator vibrator;
 
     // pop ups
@@ -168,14 +167,20 @@ public class Question1 extends AppCompatActivity {
 
         wrongSound.start();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(VibrationEffect.createOneShot(500,1));
-        }
+        vibrator.vibrate(VibrationEffect.createOneShot(500,1));
 
         conBtn.setText("Continue");
         conBtn.setOnClickListener(clickListener);
 
-
     };
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if(popupWindow != null){
+            popupWindow.dismiss();
+            popupWindow = null;
+        }
+    }
 
 }
