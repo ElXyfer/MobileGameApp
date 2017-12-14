@@ -5,14 +5,19 @@
     <string name="question1">Name the highlighted part of the flower</string>
     <string name="question2">What part of the flower protects an unopened flower?</string>
     <string name="question3">Which mineral ions are needed for chlorophyll in plants?</string>
+    <string name="results">Checkout your overall results!</string>
+    <string name="resultsSub">Click the tiles below to reveal the solutions</string>
+
     <string name="option_1">Petal</string>
     <string name="option_2">Sepal</string>
     <string name="option_3">Nectary</string>
     <string name="option_4">Stamens</string>
 
-    <string name="choice_1">-</string>
-    <string name="choice_2">-</string>
-    <string name="choice_3">Least favorite</string>
+    <string name="choice_1">Drag correct answer here.</string>
+
+    <string name="q1">Question 1: Name the highlighted part of the flower</string>
+    <string name="q2">Question 2: What part of the flower protects an unopened flower?</string>
+    <string name="q3">Question 3: Which mineral ions are needed for chlorophyll in plants?</string>
 
     <!-- Button text -->
     <string name="checkAnswer">Check Answer</string>

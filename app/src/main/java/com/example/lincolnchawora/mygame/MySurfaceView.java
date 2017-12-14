@@ -45,14 +45,17 @@ public class MySurfaceView extends SurfaceView implements Runnable {
 
         Drawable drawable = ContextCompat.getDrawable(context, R.drawable.calcium);
 
-        myObject = new GameObject(getContext(), 700, 700, 10, -10, drawable, false);
+        myObject = new GameObject(getContext(), 700, 700, 10, -10, drawable, false, 1);
+
 
         // adds my object(s) to array
         gameObjects.add(myObject);
 
-        gameObjects.add(new GameObject(getContext(), 100, 500, 10, -10, ContextCompat.getDrawable(context, R.drawable.copper), false));
 
-        gameObjects.add(new GameObject(getContext(), 500, 500, -10, 10, ContextCompat.getDrawable(context, R.drawable.magnesium), true));
+
+        gameObjects.add(new GameObject(getContext(), 100, 500, 10, -10, ContextCompat.getDrawable(context, R.drawable.copper), false, 2));
+
+        gameObjects.add(new GameObject(getContext(), 500, 500, -10, 10, ContextCompat.getDrawable(context, R.drawable.magnesium), true, 3));
 
 
         this.setOnTouchListener(new OnTouchListener() {
@@ -78,6 +81,7 @@ public class MySurfaceView extends SurfaceView implements Runnable {
 
                         if(object.equals(gameObjects.get(0))){
                             Toast.makeText(getContext(), "This is calcium!", Toast.LENGTH_SHORT).show();
+
                         } else if(object.equals(gameObjects.get(1))) {
                             Toast.makeText(getContext(), "This is copper!", Toast.LENGTH_SHORT).show();
                         } else if(object.equals(gameObjects.get(2))) {

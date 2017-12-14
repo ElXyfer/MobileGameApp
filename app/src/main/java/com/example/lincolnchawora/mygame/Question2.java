@@ -1,6 +1,7 @@
 package com.example.lincolnchawora.mygame;
 
 import android.content.ClipData; //
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -17,16 +18,14 @@ import android.view.MotionEvent; //
 import android.view.View; //
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.graphics.Typeface; //
 import android.util.Log;
-import android.widget.Toast;
 
 public class Question2 extends AppCompatActivity {
 
-    TextView option1, option2, option3, option4, choice1, choice2;
+    TextView A1, A2, A3, A4, LocationBox;
     Button conBtn;
     String Ans1, Answer2;
     MediaPlayer correctSound, wrongSound;
@@ -57,10 +56,10 @@ public class Question2 extends AppCompatActivity {
         setContentView(R.layout.activity_question2);
 
         //views to drag
-        option1 = (TextView)findViewById(R.id.option_1);
-        option2 = (TextView)findViewById(R.id.option_2);
-        option3 = (TextView)findViewById(R.id.option_3);
-        option4 = (TextView)findViewById(R.id.option_4);
+        A1 = (TextView)findViewById(R.id.option_1);
+        A2 = (TextView)findViewById(R.id.option_2);
+        A3 = (TextView)findViewById(R.id.option_3);
+        A4 = (TextView)findViewById(R.id.option_4);
 
         Ans1 = "";
 
@@ -71,16 +70,16 @@ public class Question2 extends AppCompatActivity {
         }
 
         //views to drop onto
-        choice1 = (TextView)findViewById(R.id.choice_1);
+        LocationBox = (TextView)findViewById(R.id.LBox);
 
         //set touch listeners
-        option1.setOnTouchListener(new ChoiceTouchListener());
-        option2.setOnTouchListener(new ChoiceTouchListener());
-        option3.setOnTouchListener(new ChoiceTouchListener());
-        option4.setOnTouchListener(new ChoiceTouchListener());
+        A1.setOnTouchListener(new answerTouchListener());
+        A2.setOnTouchListener(new answerTouchListener());
+        A3.setOnTouchListener(new answerTouchListener());
+        A4.setOnTouchListener(new answerTouchListener());
 
         //set drag listener for target
-        choice1.setOnDragListener(new ChoiceDragListener());
+        LocationBox.setOnDragListener(new locationDragListener());
 
         conBtn = (Button)findViewById(R.id.button3);
 
@@ -88,13 +87,15 @@ public class Question2 extends AppCompatActivity {
 
         constraintLayout = (ConstraintLayout) findViewById(R.id.constraint2);
 
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
         correctSound = MediaPlayer.create(this, R.raw.correct);
         wrongSound = MediaPlayer.create(this, R.raw.wrong);
 
 
     }
 
-    private final class ChoiceTouchListener implements View.OnTouchListener {
+    private final class answerTouchListener implements View.OnTouchListener {
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
@@ -110,9 +111,9 @@ public class Question2 extends AppCompatActivity {
         }
     }
 
-    private class ChoiceDragListener implements View.OnDragListener {
+    private class locationDragListener implements View.OnDragListener {
         @Override
-        public boolean onDrag(View targetView, DragEvent event) {
+        public boolean onDrag(View dropView, DragEvent event) {
 
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
@@ -122,53 +123,52 @@ public class Question2 extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_EXITED:
                     break;
                 case DragEvent.ACTION_DROP:
-                    //handle the dragged view being dropped over a target view
+                    //handle the dragged view being released over a target view
                     View view = (View) event.getLocalState();
 
                     //stop displaying the view where it was before it was dragged
                     view.setVisibility(View.INVISIBLE);
 //                    view.setEnabled(false);
 
-                    //view dragged item is being dropped on
-                    TextView dropTarget = (TextView) targetView;
+                    //view dragged item is being released on
+                    TextView dropLocation = (TextView) dropView;
 
-                    //view being dragged and dropped
-                    TextView dropped = (TextView) view;
+                    //view being dragged and released
+                    TextView released = (TextView) view;
 
-                    //update the text in the target view to reflect the data being dropped
-                    dropTarget.setText(dropped.getText());
+                    //update the text in the target view to reflect the data being released
+                    dropLocation.setText(released.getText());
 
-                    //make it bold to highlight the fact that an item has been dropped
-                    dropTarget.setTypeface(Typeface.DEFAULT_BOLD);
+                    //make it bold to highlight the fact that an item has been released
+                    dropLocation.setTypeface(Typeface.DEFAULT_BOLD);
 
-                    //if an item has already been dropped here, there will be a tag
-                    Object tag = dropTarget.getTag();
+                    //if an item has already been released here, there will be a tag
+                    Object tag = dropLocation.getTag();
+
+                    Log.d("ET", "" + tag);
 
 
                     //if there is already an item here, set it back visible in its original place
                     if(tag != null) {
-                          //the tag is the view id already dropped here
+                          //the tag is the view id already released here
                           int existingID = (Integer)tag;
 
                           //set the original view visible again
                           findViewById(existingID).setVisibility(View.VISIBLE);
                     }
 
-                    final String Answer2 = dropped.getText().toString();
+                    final String Answer2 = released.getText().toString();
 
+                    //set the tag in the target view to the ID of the view being released
+                    dropLocation.setTag(released.getId());
 
-                    //set the tag in the target view to the ID of the view being dropped
-                    dropTarget.setTag(dropped.getId());
-
-                    if(dropTarget.getText().toString().length() > 2) {
+                    if(dropLocation.getText().toString().length() > 2) {
                         conBtn.setEnabled(true);
                         conBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                            if(Answer2.equals("Sepal")){ // use text from view
+                            if(Answer2.equals("Sepal")){
                                 CorrectFunction(Answer2);
-
-
                             } else {
                                 WrongFunction(Answer2);
                             }
@@ -220,11 +220,13 @@ public class Question2 extends AppCompatActivity {
         popupWindow = new PopupWindow(container, 990,200);
         popupWindow.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, 50, 1250);
 
-        wrongTxt.setText("Correct answer: " + option2.getText().toString()); // "\n"
+        wrongTxt.setText("Correct answer: " + A2.getText().toString()); // "\n"
 
         wrongSound.start();
 
-        vibrator.vibrate(VibrationEffect.createOneShot(500,1));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createOneShot(500,1));
+        }
 
         Answer2 = answer;
 

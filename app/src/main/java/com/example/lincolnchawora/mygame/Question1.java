@@ -54,33 +54,15 @@ public class Question1 extends AppCompatActivity {
 
         answer = "petal";
 
-
         imgView = (ImageView)findViewById(R.id.q1_Image);
         textBox = (EditText)findViewById(R.id.editText);
-
         conBtn = (Button)findViewById(R.id.continueQ1);
-
         constraintLayout = (ConstraintLayout) findViewById(R.id.constraint);
-
-        conBtn.setEnabled(false);
-
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
         correctSound = MediaPlayer.create(this, R.raw.correct);
         wrongSound = MediaPlayer.create(this, R.raw.wrong);
 
-        Bundle extras = getIntent().getExtras();
-
-
-
-        if(extras != null){
-
-            Log.i("Muy log ", "work work " + extras.getInt("MyVarName"));
-            int val = extras.getInt("MyVarName");
-            Toast.makeText(Question1.this, "val="+val, Toast.LENGTH_LONG).show();
-        }
-
-
+        conBtn.setEnabled(false);
 
         textBox.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -97,39 +79,21 @@ public class Question1 extends AppCompatActivity {
                 return false;
             }
         });
-
 
         conBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(textBox.getText().toString().toLowerCase().replaceAll(" ", "").equals(answer)){
+                String givenAnswer = textBox.getText().toString().toLowerCase().replaceAll(" ", "");
 
+                if(givenAnswer.equals(answer)){
                     CorrectFunction();
-
-                } else if(!textBox.getText().toString().toLowerCase().equals(answer)) {
-
+                } else {
                     WrongFunction();
                     answer = textBox.getText().toString();
-
                 }
             }
         });
-
-
-        textBox.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                String ed_text = textBox.getText().toString().trim();
-                if(ed_text.isEmpty()) {
-                    conBtn.setEnabled(false);
-                } else {
-                    conBtn.setEnabled(true);
-                }
-                return false;
-            }
-        });
-
 
     }
 
@@ -167,7 +131,9 @@ public class Question1 extends AppCompatActivity {
 
         wrongSound.start();
 
-        vibrator.vibrate(VibrationEffect.createOneShot(500,1));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createOneShot(500,1));
+        }
 
         conBtn.setText("Continue");
         conBtn.setOnClickListener(clickListener);
