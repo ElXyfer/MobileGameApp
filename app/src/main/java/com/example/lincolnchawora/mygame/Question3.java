@@ -85,6 +85,7 @@ public class Question3 extends AppCompatActivity {
 
 
         titleTxt.bringToFront();
+        btn.bringToFront();
 
         btn.setEnabled(false);
 

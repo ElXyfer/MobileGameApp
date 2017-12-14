@@ -58,7 +58,6 @@ public class Question1 extends AppCompatActivity {
         textBox = (EditText)findViewById(R.id.editText);
         conBtn = (Button)findViewById(R.id.continueQ1);
         constraintLayout = (ConstraintLayout) findViewById(R.id.constraint);
-        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         correctSound = MediaPlayer.create(this, R.raw.correct);
         wrongSound = MediaPlayer.create(this, R.raw.wrong);
 
@@ -131,9 +130,11 @@ public class Question1 extends AppCompatActivity {
 
         wrongSound.start();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(VibrationEffect.createOneShot(500,1));
-        }
+        Vibrator vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+
+        vibrate.vibrate(250);
+
 
         conBtn.setText("Continue");
         conBtn.setOnClickListener(clickListener);

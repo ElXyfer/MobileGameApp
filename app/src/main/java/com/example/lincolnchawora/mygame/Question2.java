@@ -103,7 +103,7 @@ public class Question2 extends AppCompatActivity {
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
 
                 //start dragging the item touched
-                view.startDragAndDrop(data, shadowBuilder, view, 0);
+                view.startDrag(data, shadowBuilder, view, 0);
                 return true;
             } else {
                 return false;

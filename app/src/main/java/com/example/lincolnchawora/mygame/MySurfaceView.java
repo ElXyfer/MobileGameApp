@@ -74,18 +74,22 @@ public class MySurfaceView extends SurfaceView implements Runnable {
 
                         object.hasStopped = true;
 
-                            if(object.hasStopped){
-                                activity.btn.setEnabled(true);
-                            }
+//                            if(object.hasStopped){
+//                                activity.btn.setEnabled(true);
+//                                Log.d("ET", "show me " + activity.btn.setEnabled(true));
+//                            }
 
 
                         if(object.equals(gameObjects.get(0))){
                             Toast.makeText(getContext(), "This is calcium!", Toast.LENGTH_SHORT).show();
 
+                            activity.btn.setEnabled(true);
                         } else if(object.equals(gameObjects.get(1))) {
                             Toast.makeText(getContext(), "This is copper!", Toast.LENGTH_SHORT).show();
+                            activity.btn.setEnabled(true);
                         } else if(object.equals(gameObjects.get(2))) {
                             Toast.makeText(getContext(), "This is magnesium!", Toast.LENGTH_SHORT).show();
+                            activity.btn.setEnabled(true);
                         }
                     } else {
                         object.hasStopped = false;
