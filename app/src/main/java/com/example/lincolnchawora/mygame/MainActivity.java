@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         animationLoading.start();
 
         // timer duration
-        SplashTimer = 35;
+        SplashTimer = 3500;
 
         new Handler().postDelayed(new Runnable() {
             @Override
