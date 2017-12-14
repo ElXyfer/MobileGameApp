@@ -20,9 +20,10 @@ public class GameObject extends View {
     Rect r;
     float originalxSpeed, originalySpeed;
     boolean hasStopped, isCorrect;
+    int ObjID;
 
 
-    public GameObject(Context context, float  x, float y, float dx, float dy, Drawable image, boolean isCorrect) {
+    public GameObject(Context context, float  x, float y, float dx, float dy, Drawable image, boolean isCorrect, int ObjID) {
         super(context);
         this.x = x;
         this.y = y;
@@ -34,6 +35,7 @@ public class GameObject extends View {
         p.setColor(Color.RED);
         p.setTextSize(100);
         this.isCorrect = isCorrect;
+        this.ObjID = ObjID;
 
         r = image.copyBounds();
 
