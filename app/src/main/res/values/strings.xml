@@ -8,12 +8,12 @@
     <string name="results">Checkout your overall results!</string>
     <string name="resultsSub">Click the tiles below to reveal the solutions</string>
 
-    <string name="option_1">Petal</string>
-    <string name="option_2">Sepal</string>
-    <string name="option_3">Nectary</string>
-    <string name="option_4">Stamens</string>
+    <string name="ans_1">Petal</string>
+    <string name="ans_2">Sepal</string>
+    <string name="ans_3">Nectary</string>
+    <string name="ans_4">Stamens</string>
 
-    <string name="choice_1">Drag correct answer here.</string>
+    <string name="target">Drag correct answer here.</string>
 
     <string name="q1">Question 1: Name the highlighted part of the flower</string>
     <string name="q2">Question 2: What part of the flower protects an unopened flower?</string>

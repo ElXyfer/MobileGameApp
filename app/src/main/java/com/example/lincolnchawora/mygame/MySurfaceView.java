@@ -32,6 +32,7 @@ public class MySurfaceView extends SurfaceView implements Runnable {
     public MySurfaceView(Context context, final Question3 activity) {
         super(context);
 
+        // calling question 3 activity
         this.activity = activity;
 
         pWhite = new Paint();
@@ -50,8 +51,6 @@ public class MySurfaceView extends SurfaceView implements Runnable {
 
         // adds my object(s) to array
         gameObjects.add(myObject);
-
-
 
         gameObjects.add(new GameObject(getContext(), 100, 500, 10, -10, ContextCompat.getDrawable(context, R.drawable.copper), false, 2));
 

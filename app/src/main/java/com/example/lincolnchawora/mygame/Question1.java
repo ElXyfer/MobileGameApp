@@ -39,8 +39,10 @@ public class Question1 extends AppCompatActivity {
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent Q1Intent = new Intent(Question1.this, Question2.class); // change this to next question
 
+            popupWindow.dismiss();
+            popupWindow = null;
+            Intent Q1Intent = new Intent(Question1.this, Question2.class); // change this to next question
             String Ans1 = answer;
             Q1Intent.putExtra("Q1Answer", Ans1);
             startActivity(Q1Intent);
@@ -140,14 +142,5 @@ public class Question1 extends AppCompatActivity {
         conBtn.setOnClickListener(clickListener);
 
     };
-
-    @Override
-    protected void onStop(){
-        super.onStop();
-        if(popupWindow != null){
-            popupWindow.dismiss();
-            popupWindow = null;
-        }
-    }
 
 }

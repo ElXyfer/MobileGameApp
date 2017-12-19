@@ -38,9 +38,11 @@ public class Question3 extends AppCompatActivity {
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            popupWindow.dismiss();
+            popupWindow = null;
+
             Intent Q3Intent = new Intent(Question3.this, LearnPage.class); // change this to next question
 
-            Log.d("ET", "Bla el " + iA1);
             Q3Intent.putExtra("Q1Answer", Ans1);
             Q3Intent.putExtra("Q2Answer", Answer2);
             Q3Intent.putExtra("Q3Answer", Ans3);
@@ -97,10 +99,6 @@ public class Question3 extends AppCompatActivity {
             public void onClick(View v) {
 
                 for (GameObject object : mySurfaceView.gameObjects){
-
-
-
-
 
                     if(object.isCorrect && object.hasStopped){
                         CorrectFunction();
@@ -166,15 +164,6 @@ public class Question3 extends AppCompatActivity {
         btn.setOnClickListener(clickListener);
 
     };
-
-    @Override
-    protected void onStop(){
-        super.onStop();
-        if(popupWindow != null){
-            popupWindow.dismiss();
-            popupWindow = null;
-        }
-    }
 
     @Override
     protected void onPause() {
