@@ -23,8 +23,10 @@ public class GameObject extends View {
     int ObjID;
 
 
-    public GameObject(Context context, float  x, float y, float dx, float dy, Drawable image, boolean isCorrect, int ObjID) {
+    public GameObject(Context context, float  x, float y, float dx, float dy,
+                      Drawable image, boolean isCorrect, int ObjID) {
         super(context);
+        // constructor
         this.x = x;
         this.y = y;
         this.dx = dx;
@@ -42,6 +44,7 @@ public class GameObject extends View {
     }
 
 
+    // method
     void Move (Canvas canvas) {
         x+=dx;
         y+=dy;
@@ -59,15 +62,9 @@ public class GameObject extends View {
 
     public boolean isTouchInRectangle(float tx, float ty)
     {
-        if(
-                tx>(x-200) && tx<(x+10f)
+        if(tx>(x-200) && tx<(x+10f) && ty>y && ty<(y+170f))
 
-            &&
-
-            ty>y && ty<(y+170f)
-        )
-
-        return true;
+            return true;
 
         else
 

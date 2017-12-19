@@ -20,8 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.graphics.Typeface; //
-import android.util.Log;
+
 
 public class Question2 extends AppCompatActivity {
 
@@ -39,6 +38,8 @@ public class Question2 extends AppCompatActivity {
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            popupWindow.dismiss();
+            popupWindow = null;
             Intent Q2Intent = new Intent(Question2.this, Question3.class); // change this to next question
 
             Q2Intent.putExtra("Q1Answer", Ans1);
@@ -55,11 +56,12 @@ public class Question2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question2);
 
-        //views to drag
-        A1 = (TextView)findViewById(R.id.option_1);
-        A2 = (TextView)findViewById(R.id.option_2);
-        A3 = (TextView)findViewById(R.id.option_3);
-        A4 = (TextView)findViewById(R.id.option_4);
+        A1 = (TextView)findViewById(R.id.ans_1);
+        A2 = (TextView)findViewById(R.id.ans_2);
+        A3 = (TextView)findViewById(R.id.ans_3);
+        A4 = (TextView)findViewById(R.id.ans_4);
+
+        LocationBox = (TextView)findViewById(R.id.LBox);
 
         Ans1 = "";
 
@@ -69,17 +71,13 @@ public class Question2 extends AppCompatActivity {
             Ans1 = extras.getString("Q1Answer");
         }
 
-        //views to drop onto
-        LocationBox = (TextView)findViewById(R.id.LBox);
+        LocationBox.setOnDragListener(new locationDragListener());
 
-        //set touch listeners
+
         A1.setOnTouchListener(new answerTouchListener());
         A2.setOnTouchListener(new answerTouchListener());
         A3.setOnTouchListener(new answerTouchListener());
         A4.setOnTouchListener(new answerTouchListener());
-
-        //set drag listener for target
-        LocationBox.setOnDragListener(new locationDragListener());
 
         conBtn = (Button)findViewById(R.id.button3);
 
@@ -100,10 +98,10 @@ public class Question2 extends AppCompatActivity {
             if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
                 ClipData data = ClipData.newPlainText("", "");
-                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+                View.DragShadowBuilder AnswerShadow = new View.DragShadowBuilder(view);
 
                 //start dragging the item touched
-                view.startDrag(data, shadowBuilder, view, 0);
+                view.startDrag(data, AnswerShadow, view, 0);
                 return true;
             } else {
                 return false;
@@ -115,51 +113,43 @@ public class Question2 extends AppCompatActivity {
         @Override
         public boolean onDrag(View dropView, DragEvent event) {
 
-            switch (event.getAction()) {
+            final int action = event.getAction();
+
+            switch (action) {
                 case DragEvent.ACTION_DRAG_STARTED:
-                    break;
+                    return true;
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    break;
+                    return true;
                 case DragEvent.ACTION_DRAG_EXITED:
-                    break;
+                    return true;
                 case DragEvent.ACTION_DROP:
-                    //handle the dragged view being released over a target view
-                    View view = (View) event.getLocalState();
+                    //reference of item being dropped
+                    View AnswerView = (View) event.getLocalState();
 
-                    //stop displaying the view where it was before it was dragged
-                    view.setVisibility(View.INVISIBLE);
-//                    view.setEnabled(false);
+                    //stop displaying view in previous location
+                    AnswerView.setVisibility(View.INVISIBLE);
 
-                    //view dragged item is being released on
+                    //the view the dragged item is being released on
                     TextView dropLocation = (TextView) dropView;
 
-                    //view being dragged and released
-                    TextView released = (TextView) view;
+                    //the view being dragged and released
+                    TextView released = (TextView) AnswerView;
 
                     //update the text in the target view to reflect the data being released
                     dropLocation.setText(released.getText());
 
-                    //make it bold to highlight the fact that an item has been released
-                    dropLocation.setTypeface(Typeface.DEFAULT_BOLD);
-
                     //if an item has already been released here, there will be a tag
-                    Object tag = dropLocation.getTag();
+                    Object viewTag = dropLocation.getTag();
 
-                    Log.d("ET", "" + tag);
+                    if(viewTag != null) {
+                          int viewID = (Integer)viewTag;
 
-
-                    //if there is already an item here, set it back visible in its original place
-                    if(tag != null) {
-                          //the tag is the view id already released here
-                          int existingID = (Integer)tag;
-
-                          //set the original view visible again
-                          findViewById(existingID).setVisibility(View.VISIBLE);
+                          //set view visible
+                          findViewById(viewID).setVisibility(View.VISIBLE);
                     }
 
                     final String Answer2 = released.getText().toString();
 
-                    //set the tag in the target view to the ID of the view being released
                     dropLocation.setTag(released.getId());
 
                     if(dropLocation.getText().toString().length() > 2) {
@@ -178,9 +168,9 @@ public class Question2 extends AppCompatActivity {
 
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    break;
+                    return true;
                 default:
-                    break;
+                    return true;
             }
             return true;
         }
@@ -236,12 +226,4 @@ public class Question2 extends AppCompatActivity {
 
     };
 
-    @Override
-    protected void onStop(){
-        super.onStop();
-        if(popupWindow != null){
-            popupWindow.dismiss();
-            popupWindow = null;
-        }
-    }
 }
